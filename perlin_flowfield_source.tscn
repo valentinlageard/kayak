@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh2jslckvifum"]
+
+[ext_resource type="PackedScene" uid="uid://h84kg3wo6mwp" path="res://flowfield_source.tscn" id="1_02ois"]
+[ext_resource type="Script" uid="uid://cq61qmrpgqvn1" path="res://perlin_flowfield_source.gd" id="2_i1kjt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e57la"]
+radius = 5000.0
+
+[node name="perlin_flowfield_source" instance=ExtResource("1_02ois")]
+script = ExtResource("2_i1kjt")
+noise_scale = 1.0
+strength = 10.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_e57la")

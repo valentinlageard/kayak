@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ft3nke3wa21"]
+
+[ext_resource type="Script" uid="uid://c0dx51g6261wq" path="res://flowfield_manager.gd" id="1_2e67a"]
+
+[node name="flowfield_manager" type="Node"]
+script = ExtResource("1_2e67a")

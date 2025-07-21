@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl4eld1e03jb6"]
+
+[ext_resource type="Script" uid="uid://cie48757k134k" path="res://walls.gd" id="1_xxkwp"]
+
+[node name="Walls" type="Polygon2D"]
+script = ExtResource("1_xxkwp")

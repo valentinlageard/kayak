@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqk52qjbitp10"]
+
+[ext_resource type="Script" uid="uid://10p48t7udr37" path="res://path_flowfield_source.gd" id="1_68bhg"]
+
+[sub_resource type="Curve2D" id="Curve2D_gcx3t"]
+
+[node name="path_flowfield_source" type="Path2D"]
+curve = SubResource("Curve2D_gcx3t")
+script = ExtResource("1_68bhg")

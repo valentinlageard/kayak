@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhljj6usi0txm"]
+
+[ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://dqk52qjbitp10" path="res://path_flowfield_source.tscn" id="3_oi3di"]
+
+[sub_resource type="Curve2D" id="Curve2D_oi3di"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1089.98, 79, 65.813, 46.1014, -65.813, -46.1014, 890.73, 78, 74.4816, 9.43849, -74.4816, -9.43849, 737.877, 295, 27.082, -17.9039, -27.082, 17.9039, 570.467, 194, 46.357, 18.1277, -46.357, -18.1277, 479.484, 304, 10.5453, 36.4084, -10.5453, -36.4084, 411.246, 206, 45.7975, 36.784, -45.7975, -36.784, 387.59, -28, 47.9553, -2.34256, -47.9553, 2.34256, 265.672, -60, 43.2919, -30.6029, -43.2919, 30.6029, 89.1639, -19, 63.0269, -9.04346, -63.0269, 9.04346, -4.54918, 95, 43.9537, -7.85658, -43.9537, 7.85658, -89.1639, 235, 32.0262, 4.8, -32.0262, -4.8, -162.861, 227, 108.658, 1.69639, -108.658, -1.69639, -392.139, 225, 12.9649, 0.339278, -12.9649, -0.339278, -1004.46, -39)
+}
+point_count = 14
+
+[sub_resource type="Curve" id="Curve_oi3di"]
+_data = [Vector2(0.043578, 0.38255), 0.0, 0.0, 0, 0, Vector2(0.23913, 1), 0.0, 0.0, 0, 0, Vector2(0.397233, 0.606061), 0.0, 0.0, 0, 0, Vector2(0.496047, 1), 0.0, 0.0, 0, 0, Vector2(0.772727, 0.761995), 0.0, 0.0, 0, 0, Vector2(1, 0.302399), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_0b4ue"]
+_data = [Vector2(0.149083, 0), 0.0, 0.0, 0, 0, Vector2(0.263761, 1), 0.0, 0.0, 0, 0, Vector2(0.527668, 0.376263), 0.0, 0.0, 0, 0, Vector2(0.709486, 0.991793), 0.0, 0.0, 0, 0, Vector2(0.909671, 0.67076), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[node name="Level" type="Node2D"]
+position = Vector2(1604, -36)
+
+[node name="path_flowfield_source" parent="." instance=ExtResource("3_oi3di")]
+position = Vector2(-15, -1)
+scale = Vector2(1.0991, 1)
+curve = SubResource("Curve2D_oi3di")
+strength = 5.0
+width = 400.0
+strength_curve = SubResource("Curve_oi3di")
+noise_strength = 0.4
+noise_curve = SubResource("Curve_0b4ue")
+noise_scale_force = 0.4
+noise_scale_rotation = 0.8
+noise_debug_color = Color(1, 0, 0.2, 0.6)
+arrow_size = 10.0
+
+[node name="Walls" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-777, 315)
+polygon = PackedVector2Array(-28, -91, 69, -88, 180, -80, 295, -56, 346, -43, 385, 6, 475, 33, 568, -14, 570, -55, 632, -52, 711, -70, 755.002, -125.951, 765, -185, 822, -201, 861, -262, 912, -305, 1017, -304, 1102, -300, 1159, -265, 1185, -205, 1198, -93, 1241, -40, 1237, 2, 1302, 36, 1356, -2, 1418, -45, 1519, 13, 1590, 15, 1627, -12, 1673, -101, 1703, -157, 1716, -187, 1737, -214, 1774, -202, 1798, -181, 1878, -174, 1978, -147, 2086, -99, 2165, -24, 2355, 13, 2585, -5, 2759, -55, 2853, -151, 2878, -255, 2905, -385, 2891, -475, 2758, -796, 3068, -753, 3148, 114, 2255, 231, 101, 116, -319, 29, -302, -190, -253, -171, -211, -151, -151, -146, -93, -104)
+
+[node name="Walls2" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-701, -173)
+polygon = PackedVector2Array(2683, -307, 2817, 3, 2497, -59, 2311, -26, 2133, 44, 1961, 190, 1841, 218, 1769, 219, 1690, 210, 1606, 206, 1566, 220, 1536, 250, 1513, 316, 1495, 372, 1455, 418, 1411, 407, 1368, 366, 1327, 338, 1274, 354, 1240, 402, 1210, 431, 1169, 393, 1183, 278, 1172, 198, 1142, 129, 1037, 82, 900, 88, 770, 128, 687, 231, 644, 248, 607, 282, 590.056, 320.431, 563, 366, 414, 376, 263, 373, 72, 332, 10, 256, -43, 207, -107, 177, -143, 118, -200, 46, -256, -9, -298, -42)
+
+[node name="Walls3" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-315, 257)
+polygon = PackedVector2Array(-43, 5, 3, 35, 35, 14, 18, -13, -18, -16)
+
+[node name="Walls4" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-852, 146)
+polygon = PackedVector2Array(1, 12, 3, 35, 35, 14, 14, -7, -18, -16)
+
+[node name="Walls5" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-761, 82)
+polygon = PackedVector2Array(1, 12, 18, 20, 35, 14, 14, -7, 3, -5)
+
+[node name="Walls13" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-1027, 110)
+rotation = -2.72763
+polygon = PackedVector2Array(1, 12, 18, 20, 35, 14, 14, -7, 3, -5)
+
+[node name="Walls12" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-920, -2.00003)
+rotation = 0.757739
+polygon = PackedVector2Array(1, 12, 18, 20, 35, 14, 14, -7, 3, -5)
+
+[node name="Walls6" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-874, 44)
+polygon = PackedVector2Array(-2, 6, 18, 20, 23, 7, 19, -6, 7, -10)
+
+[node name="Walls11" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-918, 101)
+polygon = PackedVector2Array(2, 9, 14, 11, 19, 3, 15, -4, 6, -5)
+
+[node name="Walls15" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-828, 86)
+polygon = PackedVector2Array(6, 6, 12, 13, 19, 3, 14, -2, 7, -2)
+
+[node name="Walls10" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-1055, -39)
+polygon = PackedVector2Array(-2, 6, 18, 20, 23, 7, 19, -6, 7, -10)
+
+[node name="Walls14" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-1164, 72)
+rotation = -1.56103
+polygon = PackedVector2Array(-2, 6, 7.12585, 12.3881, 18, 20, 23, 7, 19, -6, 7, -10)
+
+[node name="Walls7" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-968, 61)
+polygon = PackedVector2Array(-6, 0, 4, 21, 26, 11, 24, -3, 6, -8)
+
+[node name="Walls8" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-922, -77)
+polygon = PackedVector2Array(-8, 10, 10, 15, 22, 9, 10, -9, -9, -4)
+
+[node name="Walls9" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-1079, 105)
+rotation = -1.8292
+polygon = PackedVector2Array(-8, 10, 10, 15, 22, 9, 10, -9, -9, -4)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.650128, 0.650128, 0.650128, 1)
+polygon = PackedVector2Array(2082, -176, 2119, -72, 2076, 164, 2144, 112, 2183, 34, 2205, -64, 2266, -119, 2310, -135, 2307, -207, 2234, -173, 2201, -128, 2159, -134, 2112, -173)

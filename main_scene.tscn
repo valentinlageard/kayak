@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://1r1m8e781vyq"]
+
+[ext_resource type="PackedScene" uid="uid://63iqe268v4ej" path="res://main_character.tscn" id="1_2c62f"]
+[ext_resource type="PackedScene" uid="uid://2jijragqb7tc" path="res://flowfield_visualizer.tscn" id="2_d5x1h"]
+[ext_resource type="PackedScene" uid="uid://dhljj6usi0txm" path="res://level.tscn" id="2_gyfs4"]
+
+[node name="MainScene" type="Node"]
+
+[node name="flowfield_visualizer" parent="." instance=ExtResource("2_d5x1h")]
+line_length_multiplier = 1.8
+target_node = NodePath("../MainCharacter")
+line_color = Color(0.452198, 0.452198, 0.452198, 1)
+
+[node name="Level" parent="." instance=ExtResource("2_gyfs4")]
+position = Vector2(-122, -123)
+
+[node name="MainCharacter" parent="." instance=ExtResource("1_2c62f")]
+position = Vector2(1942, -118)
+rotation = -1.32994
+acceleration = 180.0
+align_velocity_to_rotation_strength = 0.05
+align_rotation_to_velocity_strength = 0.05
+flow_torque_strength = 0.15

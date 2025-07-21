@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://h84kg3wo6mwp"]
+
+[ext_resource type="Script" uid="uid://bg4p75mh1uj3t" path="res://flowfield_source.gd" id="1_210vk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_210vk"]
+
+[node name="flowfield_source" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_210vk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_210vk")
+one_way_collision_margin = 128.0
