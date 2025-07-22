@@ -14,25 +14,11 @@ _data = [Vector2(0.043578, 0.38255), 0.0, 0.0, 0, 0, Vector2(0.23913, 1), 0.0, 0
 point_count = 6
 
 [sub_resource type="Curve" id="Curve_0b4ue"]
-_data = [Vector2(0.149083, 0), 0.0, 0.0, 0, 0, Vector2(0.263761, 1), 0.0, 0.0, 0, 0, Vector2(0.527668, 0.376263), 0.0, 0.0, 0, 0, Vector2(0.709486, 0.991793), 0.0, 0.0, 0, 0, Vector2(0.909671, 0.67076), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.149083, 0), 0.0, 0.0, 0, 0, Vector2(0.263761, 1), 0.0, 0.0, 0, 0, Vector2(0.527668, 0.376263), 0.0, 0.0, 0, 0, Vector2(0.709486, 0.991793), 0.0, 0.0, 0, 0, Vector2(0.893939, 0.686801), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [node name="Level" type="Node2D"]
 position = Vector2(1604, -36)
-
-[node name="path_flowfield_source" parent="." instance=ExtResource("3_oi3di")]
-position = Vector2(-15, -1)
-scale = Vector2(1.0991, 1)
-curve = SubResource("Curve2D_oi3di")
-strength = 5.0
-width = 400.0
-strength_curve = SubResource("Curve_oi3di")
-noise_strength = 0.4
-noise_curve = SubResource("Curve_0b4ue")
-noise_scale_force = 0.4
-noise_scale_rotation = 0.8
-noise_debug_color = Color(1, 0, 0.2, 0.6)
-arrow_size = 10.0
 
 [node name="Walls" parent="." instance=ExtResource("2_vonw3")]
 position = Vector2(-777, 315)
@@ -101,3 +87,17 @@ polygon = PackedVector2Array(-8, 10, 10, 15, 22, 9, 10, -9, -9, -4)
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.650128, 0.650128, 0.650128, 1)
 polygon = PackedVector2Array(2082, -176, 2119, -72, 2076, 164, 2144, 112, 2183, 34, 2205, -64, 2266, -119, 2310, -135, 2307, -207, 2234, -173, 2201, -128, 2159, -134, 2112, -173)
+
+[node name="path_flowfield_source" parent="." instance=ExtResource("3_oi3di")]
+position = Vector2(-15, -1)
+scale = Vector2(1.0991, 1)
+curve = SubResource("Curve2D_oi3di")
+strength = 5.0
+width = 400.0
+strength_curve = SubResource("Curve_oi3di")
+noise_strength = 0.4
+noise_curve = SubResource("Curve_0b4ue")
+noise_scale_force = 0.4
+noise_scale_rotation = 0.8
+noise_debug_color = Color(1, 0, 0.2, 0.6)
+arrow_size = 10.0
