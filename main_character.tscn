@@ -109,13 +109,12 @@ flow_torque_strength = 0.5
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-3.00003, -7.99999)
-polygon = PackedVector2Array(5.00003, 7.99998, 2.99999, -2.00001, 1.00003, 8, 3.00007, 19)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.9, 1)
+position = Vector2(0.710425, 0.900224)
 rotation = 0.0174533
 scale = Vector2(0.00702233, 0.00702233)
 sprite_frames = SubResource("SpriteFrames_48ufq")
 animation = &"break_right"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2.03762, -0.0159581, -1.96371, 3.35513, -1.66437, 6.28854, -1.1156, 8.66321, -0.606736, 9.68092, -0.0679449, 10.0301, 0.420957, 9.78069, 0.949766, 8.93259, 1.57835, 6.67766, 2.00737, 2.96599, 2.08718, 0.00263984, 1.98739, -3.16026, 1.62346, -5.93918, 1.01413, -8.06642, 1.01413, -8.06642, 0.692751, -8.79683, 0.210678, -9.19125, -0.242176, -9.08899, -0.855717, -8.13015, -1.37364, -6.54981, -1.85171, -3.49537)
