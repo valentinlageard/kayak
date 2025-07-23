@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhljj6usi0txm"]
+[gd_scene load_steps=7 format=3 uid="uid://dhljj6usi0txm"]
 
 [ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://ckidrp7ifq3jg" path="res://turtle.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://dqk52qjbitp10" path="res://path_flowfield_source.tscn" id="3_oi3di"]
 
 [sub_resource type="Curve2D" id="Curve2D_oi3di"]
@@ -101,3 +102,18 @@ noise_scale_force = 0.4
 noise_scale_rotation = 0.8
 noise_debug_color = Color(1, 0, 0.2, 0.6)
 arrow_size = 10.0
+
+[node name="turtle" parent="." instance=ExtResource("3_0b4ue")]
+position = Vector2(1452, 105)
+
+[node name="turtle2" parent="." instance=ExtResource("3_0b4ue")]
+position = Vector2(1558, 201)
+rotation = -1.42749
+
+[node name="turtle3" parent="." instance=ExtResource("3_0b4ue")]
+position = Vector2(1653, -17)
+rotation = -2.83964
+
+[node name="turtle4" parent="." instance=ExtResource("3_0b4ue")]
+position = Vector2(1793, 106)
+rotation = -3.4061

@@ -1,30 +1,35 @@
 # FlowFieldAffected.gd
 extends Node
 
-# How much the flow field affects this object
+## How much the flow field affects this object.
+# The strength of the force applied to the rigidbody.
+@export var influence_strength: float = 5
+## If enabled, the object will rotate to align with the flow field's direction.
 @export var align_with_field: bool = true
-@export var influence_strength: float = 5.0
-@export var rotation_speed: float = 1.0
+## How quickly the object rotates to align with the flow field.
+@export var rotation_speed: float = 5.0
 
-var parent_body: CharacterBody2D
+var parent_body: RigidBody2D
 
 func _ready():
 	parent_body = get_parent()
-	if not "velocity" in parent_body:
-		push_error("FlowFieldAffected parent must be a physics body with a 'velocity' property!")
+	if not parent_body is RigidBody2D:
+		push_error("FlowFieldAffected's parent must be a RigidBody2D for physics interactions.")
 		queue_free()
 
 func _physics_process(delta):
 	var pos = parent_body.global_position
-	var force = FlowfieldManager.get_force_at_position(pos)
-	parent_body.position += force * influence_strength * delta
+	var force_direction = FlowfieldManager.get_force_at_position(pos).normalized()
+	
+	parent_body.apply_central_force(force_direction * influence_strength)
 	
 	if align_with_field:
-		# We only try to align if the force is significant, to avoid snapping to zero.
-		if force.length_squared() > 0.01:
-			# Get the angle of the force vector. This is our target direction.
-			var target_angle = force.angle()
+		if force_direction.length_squared() > 0:
+			var target_angle = force_direction.angle()
+			var angle_diff = short_angle_dist(parent_body.rotation, target_angle)
+			parent_body.angular_velocity = angle_diff * rotation_speed
 			
-			# Smoothly rotate the parent towards the target angle.
-			# lerp_angle is essential because it correctly handles wrapping around from 2*PI to 0.
-			parent_body.rotation = lerp_angle(parent_body.rotation, target_angle+PI/2, rotation_speed * delta)
+func short_angle_dist(from, to):
+	var max_angle = PI * 2
+	var difference = fmod(to - from, max_angle)
+	return fmod(2 * difference, max_angle) - difference
