@@ -3,18 +3,18 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @export_group("Player Control")
-@export var acceleration: float = 180.0
+@export var acceleration: float = 150.0
 @export var turn_speed: float = 15.0
-@export var min_break_strength: float = 0.1
-@export var break_friction_strength: float = 0.08
-@export var break_turn_power: float = 0.005
+@export var min_break_strength: float = 20.0
+@export var break_friction_strength: float = 0.01
+@export var break_turn_power: float = 0.04
 @export var max_velocity: float = 800.0
-@export var paddle_duration: float = 0.5
+@export var paddle_duration: float = 0.7
 @export var paddle_acceleration_curve: Curve
-@export var friction: float = 0.05
-@export var bounciness: float = 0.75
-@export var align_velocity_to_rotation_strength: float = 0.05
-@export var align_rotation_to_velocity_strength: float = 0.05
+@export var friction: float = 0.015
+@export var bounciness: float = 0.4
+@export var align_velocity_to_rotation_strength: float = 0.08
+@export var align_rotation_to_velocity_strength: float = 0.03
 
 @export_group("Flow Field")
 @export var field_influence_strength: float = 100.0

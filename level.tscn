@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhljj6usi0txm"]
+[gd_scene load_steps=9 format=3 uid="uid://dhljj6usi0txm"]
 
 [ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ckidrp7ifq3jg" path="res://turtle.tscn" id="3_0b4ue"]
@@ -19,8 +19,12 @@ point_count = 6
 _data = [Vector2(0.149083, 0), 0.0, 0.0, 0, 0, Vector2(0.263761, 1), 0.0, 0.0, 0, 0, Vector2(0.527668, 0.376263), 0.0, 0.0, 0, 0, Vector2(0.709486, 0.991793), 0.0, 0.0, 0, 0, Vector2(0.893939, 0.686801), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_0b4ue"]
+font_size = 100
+font_color = Color(0.278291, 0.299904, 0.334485, 1)
+
 [node name="Level" type="Node2D"]
-position = Vector2(1604, -36)
+position = Vector2(-1816.46, -27.1042)
 
 [node name="turtle" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
 position = Vector2(1452, 105)
@@ -136,3 +140,16 @@ position = Vector2(2179.55, -93.5834)
 rotation = -1.82123
 scale = Vector2(0.0109249, 0.0109249)
 texture = ExtResource("4_0b4ue")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2028.97
+offset_top = -94.8723
+offset_right = 2979.97
+offset_bottom = 462.128
+scale = Vector2(0.05, 0.05)
+text = "A : Paddle left
+D : Paddle right
+Q : Backpaddle left
+E : Backpaddle right"
+label_settings = SubResource("LabelSettings_0b4ue")
+metadata/_edit_use_anchors_ = true

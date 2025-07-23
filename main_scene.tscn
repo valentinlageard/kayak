@@ -17,7 +17,4 @@ position = Vector2(-122, -123)
 [node name="MainCharacter" parent="." instance=ExtResource("1_2c62f")]
 position = Vector2(1989, -195)
 rotation = -1.81642
-acceleration = 180.0
-align_velocity_to_rotation_strength = 0.05
-align_rotation_to_velocity_strength = 0.05
 flow_torque_strength = 0.15

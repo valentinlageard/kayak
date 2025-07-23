@@ -99,16 +99,7 @@ rotation = 1.5708
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_48ufq")
-acceleration = 150.0
-min_break_strength = 20.0
-break_friction_strength = 0.01
-break_turn_power = 0.04
-paddle_duration = 0.7
 paddle_acceleration_curve = SubResource("Curve_07ek2")
-friction = 0.015
-bounciness = 0.4
-align_velocity_to_rotation_strength = 0.08
-align_rotation_to_velocity_strength = 0.03
 field_influence_strength = 15.0
 flow_torque_strength = 0.5
 
