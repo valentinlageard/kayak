@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var break_turn_power: float = 0.005
 @export var max_velocity: float = 800.0
 @export var paddle_duration: float = 0.5
-@export var paddle_acceleration_curve: float = 0.5
+@export var paddle_acceleration_curve: Curve
 @export var friction: float = 0.05
 @export var bounciness: float = 0.75
 @export var align_velocity_to_rotation_strength: float = 0.05
@@ -122,7 +122,7 @@ func _paddle_right_state(delta: float) -> void:
 		return
 		
 	paddle_timer += delta
-	var paddle_strength = ease(paddle_timer / paddle_duration, paddle_acceleration_curve)
+	var paddle_strength = paddle_acceleration_curve.sample(paddle_timer / paddle_duration)
 	var forward_direction = Vector2.UP.rotated(rotation)
 	velocity += forward_direction * acceleration * paddle_strength * delta
 	rotation -= turn_speed * 0.1 * paddle_strength * delta
@@ -133,7 +133,7 @@ func _paddle_left_state(delta: float) -> void:
 		return
 		
 	paddle_timer += delta
-	var paddle_strength = ease(paddle_timer / paddle_duration, paddle_acceleration_curve)
+	var paddle_strength = paddle_acceleration_curve.sample(paddle_timer / paddle_duration)
 	var forward_direction = Vector2.UP.rotated(rotation)
 	velocity += forward_direction * acceleration * paddle_strength * delta
 	rotation += turn_speed * 0.1 * paddle_strength * delta

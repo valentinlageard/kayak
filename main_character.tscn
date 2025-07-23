@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://63iqe268v4ej"]
+[gd_scene load_steps=19 format=3 uid="uid://63iqe268v4ej"]
 
 [ext_resource type="Script" uid="uid://bagq56f0ixwby" path="res://character_controller.gd" id="1_48ufq"]
 [ext_resource type="Texture2D" uid="uid://dp0ggjloucd84" path="res://At-rest.png" id="2_2q423"]
@@ -16,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://bi72sx4gl4e3w" path="res://Break_drift_right_intermediate.png" id="6_wevls"]
 [ext_resource type="Texture2D" uid="uid://b008cplpbm4p0" path="res://Hard_push_right.png" id="7_5q0wt"]
 [ext_resource type="Texture2D" uid="uid://bpnpr4lssx07j" path="res://Break_drift_right_conclude.png" id="7_8013f"]
+
+[sub_resource type="Curve" id="Curve_07ek2"]
+_data = [Vector2(0.187747, 0.0233586), 0.0, 0.0, 0, 0, Vector2(0.34585, 1), 0.0, 0.0, 0, 0, Vector2(0.895257, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_48ufq"]
 animations = [{
@@ -100,6 +104,7 @@ min_break_strength = 20.0
 break_friction_strength = 0.01
 break_turn_power = 0.04
 paddle_duration = 0.7
+paddle_acceleration_curve = SubResource("Curve_07ek2")
 friction = 0.015
 bounciness = 0.4
 align_velocity_to_rotation_strength = 0.08

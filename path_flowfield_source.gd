@@ -66,10 +66,9 @@ func _draw():
 			var step = lerp(slow_arrow_spacing, fast_arrow_spacing, strength_multiplier)
 			
 			var path_transform = curve.sample_baked_with_rotation(current_offset)
-			var position = path_transform.origin
 			var direction = path_transform.x
 			
-			_draw_arrow(position, direction)
+			_draw_arrow(path_transform.origin, direction)
 			
 			if step < 1.0: break
 			current_offset += step
