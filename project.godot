@@ -23,6 +23,7 @@ MusicPlayer="*res://music_system.tscn"
 [global_group]
 
 player=""
+npc=""
 
 [input]
 
