@@ -10,9 +10,6 @@ radius = 18.0
 collision_layer = 10
 collision_mask = 15
 script = ExtResource("1_o1k1b")
-body_repulsive_force = 1000.0
-anchor_pull_strength = 2.0
-damping = 55.0
 
 [node name="Waterlilysimple" type="Sprite2D" parent="."]
 scale = Vector2(0.005, 0.005)
