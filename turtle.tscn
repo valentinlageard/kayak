@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://ckidrp7ifq3jg"]
 
-[ext_resource type="Script" uid="uid://clhvn2ufql2kl" path="res://turtle.gd" id="1_cgedt"]
+[ext_resource type="Script" path="res://turtle.gd" id="1_cgedt"]
 [ext_resource type="Texture2D" uid="uid://dy3bpayuf66s5" path="res://Turtle_swim_1.png" id="1_f1u4q"]
 [ext_resource type="Texture2D" uid="uid://lod4vv7wuuc8" path="res://Turtle_swim_2.png" id="2_2g1hy"]
 [ext_resource type="Texture2D" uid="uid://cye8pdqiewixi" path="res://Turtle_Swim_3.png" id="3_cgedt"]
@@ -90,7 +90,7 @@ animations = [{
 radius = 3.95459
 height = 10.218
 
-[node name="turtle" type="RigidBody2D"]
+[node name="turtle" type="RigidBody2D" groups=["npc"]]
 collision_layer = 4
 collision_mask = 2
 mass = 0.1
