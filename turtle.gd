@@ -37,9 +37,6 @@ func _ready() -> void:
 	animated_sprite.play(move_animation_name)
 	is_moving = true
 	
-	animated_sprite.animation_finished.connect(_on_animation_finished)
-	animated_sprite.animation_looped.connect(_on_animation_looped)
-	
 	if not acceleration_curve:
 		printerr("Acceleration curve not set for the turtle!")
 		acceleration_curve = Curve.new()
