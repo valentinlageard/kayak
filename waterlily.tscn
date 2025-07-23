@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://co8v4vxqab50i" path="res://waterlily.gd" id="1_o1k1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1k1b"]
-radius = 24.0208
+radius = 18.0
 
 [node name="WaterlilyArea2D" type="Area2D" groups=["environment"]]
 collision_layer = 10
@@ -15,7 +15,7 @@ anchor_pull_strength = 2.0
 damping = 55.0
 
 [node name="Waterlilysimple" type="Sprite2D" parent="."]
-scale = Vector2(0.00532511, 0.00532511)
+scale = Vector2(0.005, 0.005)
 texture = ExtResource("1_3fec7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
