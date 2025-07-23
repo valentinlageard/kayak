@@ -5,11 +5,10 @@ extends Area2D
 @export_range(0.0, 1.0) var random_movement = 0.5
 @export_range(0.0, 60.0) var damping = 50.0
 @export_range(0.0, 1.0) var flower_frequency = 0.4
+@export var anchor_position:Vector2 = Vector2.ZERO  # The starting position the lily tries to return to.
 
 @onready var sprite = $Waterlilysimple
 @onready var perlin_noise = FastNoiseLite.new()
-var velocity = Vector2.ZERO         # The lily's current movement speed and direction.
-var anchor_position = Vector2.ZERO  # The starting position the lily tries to return to.
 @onready var num_frames = 0
 
 func _ready() -> void:
