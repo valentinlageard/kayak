@@ -90,7 +90,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D2" type="CharacterBody2D"]
+[node name="CharacterBody2D2" type="CharacterBody2D" groups=["player"]]
 rotation = 1.5708
 motion_mode = 1
 script = ExtResource("1_48ufq")

@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 FlowfieldManager="*res://flowfield_manager.tscn"
 MusicPlayer="*res://music_system.tscn"
 
+[global_group]
+
+player=""
+
 [input]
 
 paddle_left={
@@ -47,6 +51,7 @@ break_right={
 
 2d_physics/layer_1="Walls"
 2d_physics/layer_2="flowfield_layer"
+2d_physics/layer_4="environment"
 
 [physics]
 
