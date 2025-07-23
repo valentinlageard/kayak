@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://yk0n8uoowwlv"]
+
+[ext_resource type="Texture2D" uid="uid://kq82fcvw4o2i" path="res://waterlilysimple.png" id="1_3fec7"]
+[ext_resource type="Script" uid="uid://co8v4vxqab50i" path="res://waterlily.gd" id="1_o1k1b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1k1b"]
+radius = 24.0208
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 10
+collision_mask = 15
+script = ExtResource("1_o1k1b")
+body_repulsive_force = 1000.0
+anchor_pull_strength = 2.0
+damping = 55.0
+
+[node name="Waterlilysimple" type="Sprite2D" parent="."]
+scale = Vector2(0.00532511, 0.00532511)
+texture = ExtResource("1_3fec7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o1k1b")
+debug_color = Color(0.819864, 0.00179528, 0.966723, 0.42)
