@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1k1b"]
 radius = 24.0208
 
-[node name="Area2D" type="Area2D"]
+[node name="WaterlilyArea2D" type="Area2D"]
 collision_layer = 10
 collision_mask = 15
 script = ExtResource("1_o1k1b")
