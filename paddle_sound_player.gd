@@ -10,6 +10,11 @@ extends AudioStreamPlayer2D
 		preload('res://assets/sfx/backpaddle1.ogg'),
 		preload('res://assets/sfx/backpaddle2.ogg'),
 	]
+	
+var volume_db_ref = -9.0
+
+func _ready():
+	self.volume_db = volume_db_ref
 
 func play_paddle_sound():
 	if self.playing:
