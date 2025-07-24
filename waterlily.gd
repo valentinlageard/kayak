@@ -1,6 +1,6 @@
 extends Area2D
 @export var body_repulsive_force = 50.0
-@export var body_velocity_force = 100.0
+@export var body_velocity_force = 600.0
 @export var anchor_pull_strength = 3.0
 @export_range(0.0, 1.0) var random_movement = 0.5
 @export_range(0.0, 60.0) var damping = 50.0
@@ -51,7 +51,6 @@ func _physics_process(delta):
 			var body_velocity_coeff = 2 * (1 / (1 + exp(- 0.01 * body_velocity)) - 0.5) # logistic with coeffs to get it between 0 and 1
 			# The final force is a combination of 1/log(distance), the parameter body_repulsive_force, and the body_velocity_coefficient computed above
 			var body_force_vector = body_repulsive_force * ( min(1 / log(vector_from_body.length()+1), 5.0) + body_velocity_force * max(body_velocity_coeff-0.2, 0) * 1 / (vector_from_body.length_squared()+0.01) )# + max(body_velocity_coeff-0.5, 0) * min(1 / (vector_from_body.length()+0.1), 5.0))
-			print(1000 * max(body_velocity_coeff-0.2, 0) * 1 / (vector_from_body.length_squared()+0.01) )
 			current_force += vector_from_body.normalized() * body_force_vector
 			
 	# add anchor attraction
