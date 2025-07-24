@@ -1,10 +1,5 @@
 extends AudioStreamPlayer2D
 
-enum SoundType {
-	PADDLE,
-	BACKPADDLE
-}
-
 @onready var paddle_sounds = [
 		preload('res://assets/sfx/row1.ogg'),
 		preload('res://assets/sfx/row2.ogg'),
@@ -16,13 +11,14 @@ enum SoundType {
 		preload('res://assets/sfx/backpaddle1.ogg')
 	]
 
-func play_random(type: SoundType) -> void:
+func play_paddle_sound():
 	if self.playing:
-		return
-	match type:
-		SoundType.PADDLE:
-			self.stream = paddle_sounds.pick_random()
-			self.play()
-		SoundType.BACKPADDLE:
-			self.stream = backpaddle_sounds.pick_random()
-			self.play()
+		self.stop()
+	self.stream = paddle_sounds.pick_random()
+	self.play()
+
+func play_backpaddle_sound():
+	if self.playing:
+		self.stop()
+	self.stream = backpaddle_sounds.pick_random()
+	self.play()
