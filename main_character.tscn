@@ -198,8 +198,8 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.6, 0.9)
-scale = Vector2(0.017, 0.017)
+position = Vector2(0.64, 0.9)
+scale = Vector2(0.066, 0.066)
 skew = 0.0122173
 texture = ExtResource("17_kg3iu")
 hframes = 4
