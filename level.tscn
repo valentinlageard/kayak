@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ckidrp7ifq3jg" path="res://turtle.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://dqk52qjbitp10" path="res://path_flowfield_source.tscn" id="3_oi3di"]
-[ext_resource type="Texture2D" uid="uid://cl36tb1mao53w" path="res://car.png" id="4_0b4ue"]
+[ext_resource type="Texture2D" uid="uid://cl36tb1mao53w" path="res://assets/textures/environment/car.png" id="4_0b4ue"]
 
 [sub_resource type="Curve2D" id="Curve2D_oi3di"]
 _data = {
