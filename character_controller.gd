@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimationPlayer = $AnimationPlayer
 
 @export_group("Player Control")
 @export var acceleration: float = 150.0
