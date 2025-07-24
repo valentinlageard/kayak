@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://63iqe268v4ej"]
+[gd_scene load_steps=23 format=3 uid="uid://63iqe268v4ej"]
 
 [ext_resource type="Script" uid="uid://bagq56f0ixwby" path="res://character_controller.gd" id="1_48ufq"]
 [ext_resource type="Texture2D" uid="uid://dp0ggjloucd84" path="res://assets/textures/character/At-rest.png" id="2_2q423"]
@@ -7,15 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://cnsaj0x662vtq" path="res://assets/textures/character/Break_drift_left_intermediate.png" id="3_kg3iu"]
 [ext_resource type="Texture2D" uid="uid://naarlaolyecr" path="res://assets/textures/character/Begin_push_right.png" id="4_2v62t"]
 [ext_resource type="Texture2D" uid="uid://bp7aj5b2543ma" path="res://assets/textures/character/Break_drift_left_conclude.png" id="4_mjyag"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/Push_left.png" id="4_qthh5"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/Hard_push_left.png" id="5_1vudk"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/End_push_lift_right_paddle.png" id="5_wcpx6"]
+[ext_resource type="Texture2D" uid="uid://cli63ybtpy1y6" path="res://assets/textures/character/Push_left.png" id="4_qthh5"]
+[ext_resource type="Texture2D" uid="uid://d2elap4f7gmc0" path="res://assets/textures/character/Hard_push_left.png" id="5_1vudk"]
+[ext_resource type="Texture2D" uid="uid://c3n23jt1w2f2h" path="res://assets/textures/character/End_push_lift_right_paddle.png" id="5_wcpx6"]
 [ext_resource type="Texture2D" uid="uid://cxtnxatvsap4t" path="res://assets/textures/character/Break_drift_right_initial.png" id="5_wtyc1"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/End_push_lift_left_paddle.png" id="6_k7f46"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/Push_right.png" id="6_u3evn"]
+[ext_resource type="Texture2D" uid="uid://c8g0wve8j3tbu" path="res://assets/textures/character/End_push_lift_left_paddle.png" id="6_k7f46"]
+[ext_resource type="Texture2D" uid="uid://f55ucuh7lsgu" path="res://assets/textures/character/Push_right.png" id="6_u3evn"]
 [ext_resource type="Texture2D" uid="uid://bi72sx4gl4e3w" path="res://assets/textures/character/Break_drift_right_intermediate.png" id="6_wevls"]
-[ext_resource type="Texture2D" path="res://assets/textures/character/Hard_push_right.png" id="7_5q0wt"]
+[ext_resource type="Texture2D" uid="uid://b008cplpbm4p0" path="res://assets/textures/character/Hard_push_right.png" id="7_5q0wt"]
 [ext_resource type="Texture2D" uid="uid://bpnpr4lssx07j" path="res://assets/textures/character/Break_drift_right_conclude.png" id="7_8013f"]
+[ext_resource type="Texture2D" uid="uid://bngd36eghmln1" path="res://assets/textures/character/kayak_sprite.png" id="17_kg3iu"]
 
 [sub_resource type="Curve" id="Curve_07ek2"]
 _data = [Vector2(0.187747, 0.0233586), 0.0, 0.0, 0, 0, Vector2(0.34585, 1), 0.0, 0.0, 0, 0, Vector2(0.895257, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -94,6 +95,43 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_kg3iu"]
+resource_name = "idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_mjyag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtyc1"]
+_data = {
+&"RESET": SubResource("Animation_mjyag"),
+&"idle": SubResource("Animation_kg3iu")
+}
+
 [node name="CharacterBody2D2" type="CharacterBody2D" groups=["player"]]
 rotation = 1.5708
 collision_mask = 2
@@ -115,3 +153,13 @@ animation = &"break_right"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2.03762, -0.0159581, -1.96371, 3.35513, -1.66437, 6.28854, -1.1156, 8.66321, -0.606736, 9.68092, -0.0679449, 10.0301, 0.420957, 9.78069, 0.949766, 8.93259, 1.57835, 6.67766, 2.00737, 2.96599, 2.08718, 0.00263984, 1.98739, -3.16026, 1.62346, -5.93918, 1.01413, -8.06642, 1.01413, -8.06642, 0.692751, -8.79683, 0.210678, -9.19125, -0.242176, -9.08899, -0.855717, -8.13015, -1.37364, -6.54981, -1.85171, -3.49537)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wtyc1")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("17_kg3iu")
+hframes = 4
+vframes = 5
