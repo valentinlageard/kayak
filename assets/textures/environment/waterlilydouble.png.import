@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckjx816f8qndy"
-path="res://.godot/imported/waterlilydouble.png-08750879b7c8a622b555ebfd3834c031.ctex"
+path="res://.godot/imported/waterlilydouble.png-c0a5a1d622c3855666da13c8530289b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://waterlilydouble.png"
-dest_files=["res://.godot/imported/waterlilydouble.png-08750879b7c8a622b555ebfd3834c031.ctex"]
+source_file="res://assets/textures/environment/waterlilydouble.png"
+dest_files=["res://.godot/imported/waterlilydouble.png-c0a5a1d622c3855666da13c8530289b7.ctex"]
 
 [params]
 
