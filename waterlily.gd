@@ -20,11 +20,11 @@ func _ready() -> void:
 	# Pick random waterlily texture
 	var random_texture_picker = randi() % 100
 	if random_texture_picker <= flower_frequency * 100 * 0.3:
-		sprite.texture = preload("res://waterlilydouble.png")
+		sprite.texture = preload("res://assets/textures/environment/waterlilydouble.png")
 	elif random_texture_picker <= flower_frequency * 100:
-		sprite.texture = preload("res://waterlilysimple.png")
+		sprite.texture = preload("res://assets/textures/environment/waterlilysimple.png")
 	else:
-		sprite.texture = preload("res://waterlilynoflower.png")
+		sprite.texture = preload("res://assets/textures/environment/waterlilynoflower.png")
 	# random rotation
 	sprite.rotate(randf() * 2 * PI)
 	
