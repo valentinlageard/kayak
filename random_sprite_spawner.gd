@@ -5,14 +5,20 @@ extends Polygon2D
 @export var node_scenes: Array[PackedScene]
 ## The target number of sprites to generate within the polygon.
 @export var sprites_count: int = 50
-## If true, a new random seed will be used every time the game starts.
-@export var random_seed: bool = true
-## The specific seed for the noise generator. Changing this will produce a different, but repeatable, noise pattern.
-@export var noise_seed: int = 1337:
+## The fundamental algorithm used to generate the noise (e.g., smooth Perlin, blocky Cellular).
+@export var noise_pattern: FastNoiseLite.NoiseType = FastNoiseLite.TYPE_PERLIN:
 	set(value):
-		noise_seed = value; _update_tool_preview()
+		noise_pattern = value; _update_tool_preview()
+## The "zoom level" of the noise. Higher values create smaller, more frequent features.
+@export_range(0.001, 0.5, 0.001) var noise_frequency: float = 0.04:
+	set(value):
+		noise_frequency = value; _update_tool_preview()
+## If true, prints debug statistics on the generation into the output console
+@export var print_debug_stats: bool = true
 
 @export_group("Rendering")
+## If false, the noise won't be useed in the generation process (pure random Halton generation)
+@export var use_noise: bool = true
 ## The base cutoff for the noise. A point with a noise value below this is less likely to spawn a sprite.
 @export_range(0.0, 1.0) var noise_threshold: float = 0.5
 ## Blends between pure random chance and pure noise-based placement. 1.0 = purely noise-based, 0.0 = purely random.
@@ -26,14 +32,13 @@ extends Polygon2D
 
 # --- NOISE CONTROLS ---
 @export_group("Noise Parameters")
-## The fundamental algorithm used to generate the noise (e.g., smooth Perlin, blocky Cellular).
-@export var noise_pattern: FastNoiseLite.NoiseType = FastNoiseLite.TYPE_PERLIN:
+## If true, a new random seed will be used every time the game starts.
+@export var random_seed: bool = true
+## The specific seed for the noise generator. Changing this will produce a different, but repeatable, noise pattern.
+@export var noise_seed: int = 1337:
 	set(value):
-		noise_pattern = value; _update_tool_preview()
-## The "zoom level" of the noise. Higher values create smaller, more frequent features.
-@export_range(0.001, 0.5, 0.001) var noise_frequency: float = 0.04:
-	set(value):
-		noise_frequency = value; _update_tool_preview()
+		noise_seed = value; _update_tool_preview()
+
 ## The number of noise layers to combine for a more detailed pattern (used by fractal types).
 @export_range(1, 10) var noise_octaves: int = 2:
 	set(value):
@@ -206,6 +211,8 @@ func _halton_number(b: int, index: int) -> float:
 		index = int(index / b)
 	return result
 
+
+var debug_stats = {'target': sprites_count, 'realised': 0, 'rejected': {'out_of_bounds': 0, 'noise_filter': 0, 'edge_smoothing': 0, 'min_distance': 0}}
 ## This is the main function responsible for the procedural generation.
 ## It is only called once when the game starts.
 func _spawn_nodes():
@@ -231,30 +238,30 @@ func _spawn_nodes():
 		## Stop once we have found enough sprites.
 		if valid_candidates.size() >= sprites_count: break
 		## Rule 1: Point must be inside the user-drawn polygon shape.
-		if not Geometry2D.is_point_in_polygon(point, points): continue
+		if not Geometry2D.is_point_in_polygon(point, points): debug_stats.rejected.out_of_bounds += 1; continue
 		
 		## Rule 2: Point must pass the noise threshold check.
-		var noise_value = (noise_generator.get_noise_2d(point.x, point.y) + 1.0) / 2.0
-		if threshold_strength * noise_value + (1- threshold_strength) * randf() < noise_threshold: continue
+		if use_noise:
+			var noise_value = (noise_generator.get_noise_2d(point.x, point.y) + 1.0) / 2.0
+			if threshold_strength * noise_value + (1- threshold_strength) * randf() < noise_threshold: debug_stats.rejected.noise_filter += 1; continue
 		
 		## Rule 3: Point must pass the edge smoothing check, which rejects points closer to the edge.
 		var dist_left = point.x - bounds.position.x
 		var dist_right = bounds.end.x - point.x
 		var dist_top = point.y - bounds.position.y
 		var dist_bottom = bounds.end.y - point.y
-		if randf() * bounds.size.x * edge_smoothing > dist_left: continue
-		if randf() * bounds.size.x * edge_smoothing > dist_right: continue
-		if randf() * bounds.size.y * edge_smoothing > dist_top: continue
-		if randf() * bounds.size.y * edge_smoothing > dist_bottom: continue
+		if randf() * bounds.size.x * edge_smoothing > dist_left: debug_stats.rejected.edge_smoothing += 1; continue
+		if randf() * bounds.size.x * edge_smoothing > dist_right: debug_stats.rejected.edge_smoothing += 1; continue
+		if randf() * bounds.size.y * edge_smoothing > dist_top: debug_stats.rejected.edge_smoothing += 1; continue
+		if randf() * bounds.size.y * edge_smoothing > dist_bottom: debug_stats.rejected.edge_smoothing += 1; continue
 		
 		## If all rules are passed, add the point to the final list.
 		valid_candidates.append(point)
 
 	var final_positions = valid_candidates
 
-	## For debugging: print the target vs actual number of spawns.
-	print('Targeted number of spawns: ', sprites_count)
-	print('Realised spawns: ', len(final_positions))
+	## For debugging as an option
+	if print_debug_stats: print(debug_stats)
 
 	## Instantiate the chosen scenes at the final calculated positions.
 	for pos in final_positions:
