@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimationPlayer = $AnimationPlayer
+@onready var paddle_sound_player: AudioStreamPlayer2D = $PaddleSoundPlayer
 @onready var particles_front_left: CPUParticles2D = $ParticlesFrontLeft
 @onready var particles_front_right: CPUParticles2D = $ParticlesFrontRight
 @onready var particles_back_left: CPUParticles2D = $ParticlesBackLeft
@@ -72,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	if current_state != State.BREAK_LEFT and current_state != State.BREAK_RIGHT:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	velocity = velocity.limit_length(max_velocity)
+	paddle_sound_player.volume_db = paddle_sound_player.volume_db_ref + velocity.length()/100
 
 	# --- 6. MOVE AND HANDLE COLLISIONS ---
 	move_and_slide()
