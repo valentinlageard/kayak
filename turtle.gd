@@ -67,13 +67,17 @@ func _ready() -> void:
 func _on_attach_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group('player'):
 		player_to_follow = body
-		movement_state = MovementState.FOLLOWING
+		if movement_state == MovementState.WANDERING:
+				movement_state = MovementState.FOLLOWING
+				GlobalSignals.turtle_started_following.emit()
 
 # When exiting DetachArea2D
 func _on_detach_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group('player'):
 		player_to_follow = null
-		movement_state = MovementState.WANDERING
+		if movement_state == MovementState.FOLLOWING:
+			movement_state = MovementState.WANDERING
+			GlobalSignals.turtle_stopped_following.emit()
 	
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	# Apply friction
