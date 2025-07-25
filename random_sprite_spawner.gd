@@ -256,6 +256,7 @@ func _spawn_nodes():
 		if randf() * bounds.size.y * edge_smoothing > dist_bottom: debug_stats.rejected.edge_smoothing += 1; continue
 		
 		## If all rules are passed, add the point to the final list.
+		debug_stats.realised += 1
 		valid_candidates.append(point)
 
 	var final_positions = valid_candidates
