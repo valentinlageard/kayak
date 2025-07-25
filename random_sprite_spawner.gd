@@ -67,6 +67,7 @@ func _get_halton_distribution_2D(n: int, min: float = 0, max: float = 1):
 		_update_tool_preview()
 
 @export_range(0.0, 1.0) var noise_threshold: float = 0.5
+@export var apply_force: bool = true
 
 var noise_generator: FastNoiseLite
 var MAX_ITERATIONS = 10
@@ -148,6 +149,37 @@ func _spawn_nodes():
 			valid_candidates.append(potential_point)
 			candidates[i] = null
 			valid_candidates_number += 1
+	var new_positions = []
+	## PASS 2: apply repulsive force to sprites	
+	if apply_force:
+		print('apply force')
+		var displacement = []
+		for i in range(valid_candidates_number):
+			displacement.append(Vector2.ZERO)
+			new_positions.append(Vector2.ZERO)
+		var k = sqrt((bounds.end.x - bounds.position.x) * (bounds.end.y - bounds.position.y)) /8
+		var t = 1.0
+		for ITER in range(50):
+			print( ITER )
+			for i in range(valid_candidates_number):
+				var candidate_i = valid_candidates[i]
+				var noise_value_i = ((noise_generator.get_noise_2d(candidate_i.x, candidate_i.y) + 1.0) / 2.0)
+				for j in range(i+1, valid_candidates_number):
+					var candidate_j = valid_candidates[j]
+					var delta = candidate_i - candidate_j
+					var distance = delta.length() + 0.01
+					var noise_value_j = ((noise_generator.get_noise_2d(candidate_i.x, candidate_i.y) + 1.0) / 2.0)
+					var repulsive_force = k ** 2 / distance * 10
+					
+					displacement[i] += delta * repulsive_force
+					displacement[j] -= delta * repulsive_force
+				valid_candidates[i] += displacement[i]
+				new_positions[i] = valid_candidates[i]
+
+			t = max(0, t-1/50)
+	else:
+		new_positions = valid_candidates
+
 	var num_to_spawn = min(number_sprites_to_find, valid_candidates.size())
 	print('number to find: ', number_sprites_to_find)
 	print('number found: ', len(valid_candidates))
