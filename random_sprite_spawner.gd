@@ -3,22 +3,7 @@ extends Polygon2D
 
 @export var node_scenes: Array[PackedScene]
 
-var list_of_primes = [
-		2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97, 101,
-		103, 107, 109, 113,127, 131, 137, 139, 149, 151, 157, 163, 167, 173,179, 181, 191, 193, 197, 199,
-		211, 223, 227, 229,233, 239, 241, 251, 257, 263, 269, 271, 277, 281,283, 293, 307, 311, 313, 317,
-		331, 337, 347, 349,353, 359, 367, 373, 379, 383, 389, 397, 401, 409,419, 421, 431, 433, 439, 443,
-		449, 457, 461, 463,467, 479, 487, 491, 499, 503, 509, 521, 523, 541,547, 557, 563, 569, 571, 577,
-	]
 
-func _halton_number(b: int, index: int) -> float:
-	var result = 0.0
-	var f = 1.0
-	while index > 0:
-		f = f / float(b);
-		result += f * float(index % b)
-		index = index / b
-	return result
 
 func _get_halton_distribution_2D(n: int, min: float = 0, max: float = 1):
 	var p1 = list_of_primes.pick_random()
@@ -110,7 +95,30 @@ func _configure_noise():
 # Grid step
 
 
+	
+# List of prime numbers for the halton distribution
+# 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97, 101,
+# 103, 107, 109, 113,127, 131, 137, 139, 149, 151, 157, 163, 167, 173,179, 181, 191, 193, 197, 199,
+# 211, 223, 227, 229,233, 239, 241, 251, 257, 263, 269, 271, 277, 281,283, 293, 307, 311, 313, 317,
+# 331, 337, 347, 349,353, 359, 367, 373, 379, 383, 389, 397, 401, 409,419, 421, 431, 433, 439, 443,
+# 449, 457, 461, 463,467, 479, 487, 491, 499, 503, 509, 521, 523, 541,547, 557, 563, 569, 571, 577
 
+func _get_halton_distribution_2D(n: int, rect: Rect2) -> Array:
+	var samples = []
+	for i in range(1, n + 1):
+		var x = _halton_number(prime_number_1, i) * rect.size.x + rect.position.x
+		var y = _halton_number(prime_number_2, i) * rect.size.y + rect.position.y
+		samples.append(Vector2(x, y))
+	return samples
+
+func _halton_number(b: int, index: int) -> float:
+	var result = 0.0
+	var f = 1.0
+	while index > 0:
+		f /= float(b)
+		result += f * float(index % b)
+		index = int(index / b)
+	return result
 
 func _spawn_nodes():
 	for child in get_children():
@@ -123,10 +131,10 @@ func _spawn_nodes():
 	for p in self.polygon:
 		bounds = bounds.expand(p)
 
-	var candidates = _get_halton_distribution_2D(number_sprites_to_find * 5, min(bounds.position.x, bounds.position.y), max(bounds.end.x, bounds.end.y))
 	candidates.shuffle()
 	var candidates_length = len(candidates)
 	var valid_candidates_number = 0
+	var candidates = _get_halton_distribution_2D(sprites_count * 5, bounds)
 	var valid_candidates = []
 	var noise_buffer = []
 	## PASS 1: GATHER ALL POSSIBLE SPAWN POINTS
