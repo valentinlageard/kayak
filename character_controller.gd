@@ -2,6 +2,12 @@ extends CharacterBody2D
 
 @onready var animated_sprite: AnimationPlayer = $AnimationPlayer
 @onready var paddle_sound_player: AudioStreamPlayer2D = $PaddleSoundPlayer
+@onready var particles_front_left: CPUParticles2D = $ParticlesFrontLeft
+@onready var particles_front_right: CPUParticles2D = $ParticlesFrontRight
+@onready var particles_back_left: CPUParticles2D = $ParticlesBackLeft
+@onready var particles_back_right: CPUParticles2D = $ParticlesBackRight
+@onready var particles_middle_left: CPUParticles2D = $ParticlesMiddleLeft
+@onready var particles_middle_right: CPUParticles2D = $ParticlesMiddleRight
 
 @export_group("Player Control")
 @export var acceleration: float = 150.0
@@ -16,10 +22,13 @@ extends CharacterBody2D
 @export var bounciness: float = 0.4
 @export var align_velocity_to_rotation_strength: float = 0.08
 @export var align_rotation_to_velocity_strength: float = 0.03
+@export var min_particles_velocity_threshold: float = 5
+@export var max_particles_velocity_threshold: float = 40
 
 @export_group("Flow Field")
 @export var field_influence_strength: float = 100.0
 @export var flow_torque_strength: float = 2.0
+
 
 enum State { IDLE, PADDLE_RIGHT, PADDLE_LEFT, BREAK_LEFT, BREAK_RIGHT }
 var current_state: State = State.IDLE
@@ -73,6 +82,15 @@ func _physics_process(delta: float) -> void:
 		var normal = collision.get_normal()
 		velocity = velocity.bounce(normal)
 		velocity *= bounciness
+	
+	# Manage particles
+	var amount = remap(velocity.length(), min_particles_velocity_threshold, max_particles_velocity_threshold, 0, 1)
+	particles_back_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_back_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_front_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_front_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_middle_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_middle_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
 
 	MusicPlayer.update_player_state(self.velocity, self.global_position)
 

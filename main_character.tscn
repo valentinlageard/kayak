@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://63iqe268v4ej"]
+[gd_scene load_steps=19 format=3 uid="uid://63iqe268v4ej"]
 
 [ext_resource type="Script" uid="uid://bagq56f0ixwby" path="res://character_controller.gd" id="1_48ufq"]
 [ext_resource type="Texture2D" uid="uid://bngd36eghmln1" path="res://assets/textures/character/kayak_sprite.png" id="17_kg3iu"]
@@ -7,6 +7,32 @@
 [sub_resource type="Curve" id="Curve_07ek2"]
 _data = [Vector2(0.187747, 0.0233586), 0.0, 0.0, 0, 0, Vector2(0.34585, 1), 0.0, 0.0, 0, 0, Vector2(0.895257, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="Curve" id="Curve_kg3iu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.780632, 0.318813), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_kg3iu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wtyc1"]
+offsets = PackedFloat32Array(0, 0.0151976)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_07ek2"]
+colors = PackedColorArray(1, 1, 1, 1, 0.962985, 0.962985, 0.962985, 0)
+
+[sub_resource type="Gradient" id="Gradient_wevls"]
+offsets = PackedFloat32Array(0, 0.0121581)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_8013f"]
+offsets = PackedFloat32Array(0, 0.0121581)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_mjyag"]
+offsets = PackedFloat32Array(0, 0.00303951)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_mjyag"]
 length = 0.001
@@ -171,12 +197,14 @@ _data = {
 &"paddle_right": SubResource("Animation_y5ku0")
 }
 
-[node name="CharacterBody2D2" type="CharacterBody2D" groups=["player"]]
+[node name="CharacterBody2D3" type="CharacterBody2D" groups=["player"]]
 rotation = 1.5708
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_48ufq")
 paddle_acceleration_curve = SubResource("Curve_07ek2")
+min_particles_velocity_threshold = 50.0
+max_particles_velocity_threshold = 100.0
 field_influence_strength = 15.0
 flow_torque_strength = 0.5
 
@@ -188,9 +216,147 @@ script = ExtResource("17_mjyag")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2.03762, -0.0159581, -1.96371, 3.35513, -1.66437, 6.28854, -1.1156, 8.66321, -0.606736, 9.68092, -0.0679449, 10.0301, 0.420957, 9.78069, 0.949766, 8.93259, 1.57835, 6.67766, 2.00737, 2.96599, 2.08718, 0.00263984, 1.98739, -3.16026, 1.62346, -5.93918, 1.01413, -8.06642, 1.01413, -8.06642, 0.692751, -8.79683, 0.210678, -9.19125, -0.242176, -9.08899, -0.855717, -8.13015, -1.37364, -6.54981, -1.85171, -3.49537)
+
+[node name="ParticlesFrontRight" type="CPUParticles2D" parent="."]
+position = Vector2(0.557224, -9.19589)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_wtyc1")
+
+[node name="ParticlesFrontLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-0.316525, -9.24991)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(-0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_wevls")
+
+[node name="ParticlesBackLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-0.828315, 8.59762)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(-0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_8013f")
+
+[node name="ParticlesBackRight" type="CPUParticles2D" parent="."]
+position = Vector2(0.865218, 8.6589)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_mjyag")
+
+[node name="ParticlesMiddleLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-1.66213, -6.2908)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_align_y = true
+direction = Vector2(-0.2, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_8013f")
+
+[node name="ParticlesMiddleRight" type="CPUParticles2D" parent="."]
+position = Vector2(1.67984, -6.34396)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_align_y = true
+direction = Vector2(0.2, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_mjyag")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
