@@ -17,7 +17,7 @@ func _ready():
 		push_error("FlowFieldAffected's parent must be a RigidBody2D for physics interactions.")
 		queue_free()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var pos = parent_body.global_position
 	var force_direction = FlowfieldManager.get_force_at_position(pos).normalized()
 	

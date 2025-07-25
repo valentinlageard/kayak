@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7e5x4w4vrdvl"
+path="res://.godot/imported/kayak electro.ogg-f23bb46cd0a3dbb8b3196bb027d97494.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/kayak electro.ogg"
+dest_files=["res://.godot/imported/kayak electro.ogg-f23bb46cd0a3dbb8b3196bb027d97494.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

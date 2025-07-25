@@ -1,121 +1,372 @@
-[gd_scene load_steps=18 format=3 uid="uid://63iqe268v4ej"]
+[gd_scene load_steps=19 format=3 uid="uid://63iqe268v4ej"]
 
 [ext_resource type="Script" uid="uid://bagq56f0ixwby" path="res://character_controller.gd" id="1_48ufq"]
-[ext_resource type="Texture2D" uid="uid://dp0ggjloucd84" path="res://At-rest.png" id="2_2q423"]
-[ext_resource type="Texture2D" uid="uid://b7cnf82nm437u" path="res://Break_drift_left_initial.png" id="2_07ek2"]
-[ext_resource type="Texture2D" uid="uid://d3btow3bh74ql" path="res://Begin_push_left.png" id="3_5q0wt"]
-[ext_resource type="Texture2D" uid="uid://cnsaj0x662vtq" path="res://Break_drift_left_intermediate.png" id="3_kg3iu"]
-[ext_resource type="Texture2D" uid="uid://naarlaolyecr" path="res://Begin_push_right.png" id="4_2v62t"]
-[ext_resource type="Texture2D" uid="uid://bp7aj5b2543ma" path="res://Break_drift_left_conclude.png" id="4_mjyag"]
-[ext_resource type="Texture2D" uid="uid://cli63ybtpy1y6" path="res://Push_left.png" id="4_qthh5"]
-[ext_resource type="Texture2D" uid="uid://d2elap4f7gmc0" path="res://Hard_push_left.png" id="5_1vudk"]
-[ext_resource type="Texture2D" uid="uid://c3n23jt1w2f2h" path="res://End_push_lift_right_paddle.png" id="5_wcpx6"]
-[ext_resource type="Texture2D" uid="uid://cxtnxatvsap4t" path="res://Break_drift_right_initial.png" id="5_wtyc1"]
-[ext_resource type="Texture2D" uid="uid://c8g0wve8j3tbu" path="res://End_push_lift_left_paddle.png" id="6_k7f46"]
-[ext_resource type="Texture2D" uid="uid://f55ucuh7lsgu" path="res://Push_right.png" id="6_u3evn"]
-[ext_resource type="Texture2D" uid="uid://bi72sx4gl4e3w" path="res://Break_drift_right_intermediate.png" id="6_wevls"]
-[ext_resource type="Texture2D" uid="uid://b008cplpbm4p0" path="res://Hard_push_right.png" id="7_5q0wt"]
-[ext_resource type="Texture2D" uid="uid://bpnpr4lssx07j" path="res://Break_drift_right_conclude.png" id="7_8013f"]
+[ext_resource type="Texture2D" uid="uid://bngd36eghmln1" path="res://assets/textures/character/kayak_sprite.png" id="17_kg3iu"]
+[ext_resource type="Script" uid="uid://brr23viinrmfp" path="res://paddle_sound_player.gd" id="17_mjyag"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_48ufq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_07ek2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_kg3iu")
-}, {
-"duration": 2.0,
-"texture": ExtResource("4_mjyag")
-}],
-"loop": true,
-"name": &"break_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_wtyc1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_wevls")
-}, {
-"duration": 2.0,
-"texture": ExtResource("7_8013f")
-}],
-"loop": true,
-"name": &"break_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_2q423")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_5q0wt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_qthh5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_1vudk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_k7f46")
-}],
-"loop": false,
-"name": &"paddle_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_2v62t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_u3evn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_5q0wt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_wcpx6")
-}],
-"loop": false,
-"name": &"paddle_right",
-"speed": 5.0
+[sub_resource type="Curve" id="Curve_07ek2"]
+_data = [Vector2(0.187747, 0.0233586), 0.0, 0.0, 0, 0, Vector2(0.34585, 1), 0.0, 0.0, 0, 0, Vector2(0.895257, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_kg3iu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.780632, 0.318813), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_kg3iu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wtyc1"]
+offsets = PackedFloat32Array(0, 0.0151976)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_07ek2"]
+colors = PackedColorArray(1, 1, 1, 1, 0.962985, 0.962985, 0.962985, 0)
+
+[sub_resource type="Gradient" id="Gradient_wevls"]
+offsets = PackedFloat32Array(0, 0.0121581)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_8013f"]
+offsets = PackedFloat32Array(0, 0.0121581)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_mjyag"]
+offsets = PackedFloat32Array(0, 0.00303951)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_mjyag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 8]
+}
+
+[sub_resource type="Animation" id="Animation_wtyc1"]
+resource_name = "break_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddleSoundPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_backpaddle_sound"
 }]
+}
 
-[node name="CharacterBody2D2" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="Animation" id="Animation_wevls"]
+resource_name = "break_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddleSoundPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_backpaddle_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kg3iu"]
+resource_name = "idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_8013f"]
+resource_name = "paddle_left"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddleSoundPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_paddle_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_y5ku0"]
+resource_name = "paddle_right"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 0.0947322, 24.2515, 18.3792),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaddleSoundPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_paddle_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtyc1"]
+_data = {
+&"RESET": SubResource("Animation_mjyag"),
+&"break_left": SubResource("Animation_wtyc1"),
+&"break_right": SubResource("Animation_wevls"),
+&"idle": SubResource("Animation_kg3iu"),
+&"paddle_left": SubResource("Animation_8013f"),
+&"paddle_right": SubResource("Animation_y5ku0")
+}
+
+[node name="CharacterBody2D3" type="CharacterBody2D" groups=["player"]]
 rotation = 1.5708
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_48ufq")
-acceleration = 150.0
-min_break_strength = 20.0
-break_friction_strength = 0.01
-break_turn_power = 0.04
-paddle_duration = 0.7
-friction = 0.015
-bounciness = 0.2
-align_velocity_to_rotation_strength = 0.08
-align_rotation_to_velocity_strength = 0.03
+paddle_acceleration_curve = SubResource("Curve_07ek2")
+min_particles_velocity_threshold = 50.0
+max_particles_velocity_threshold = 100.0
 field_influence_strength = 15.0
 flow_torque_strength = 0.5
 
+[node name="PaddleSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0.71, 0.9)
+scale = Vector2(0.007, 0.007)
+pitch_scale = 0.57
+script = ExtResource("17_mjyag")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.710425, 0.900224)
-rotation = 0.0174533
-scale = Vector2(0.00702233, 0.00702233)
-sprite_frames = SubResource("SpriteFrames_48ufq")
-animation = &"break_right"
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2.03762, -0.0159581, -1.96371, 3.35513, -1.66437, 6.28854, -1.1156, 8.66321, -0.606736, 9.68092, -0.0679449, 10.0301, 0.420957, 9.78069, 0.949766, 8.93259, 1.57835, 6.67766, 2.00737, 2.96599, 2.08718, 0.00263984, 1.98739, -3.16026, 1.62346, -5.93918, 1.01413, -8.06642, 1.01413, -8.06642, 0.692751, -8.79683, 0.210678, -9.19125, -0.242176, -9.08899, -0.855717, -8.13015, -1.37364, -6.54981, -1.85171, -3.49537)
+
+[node name="ParticlesFrontRight" type="CPUParticles2D" parent="."]
+position = Vector2(0.557224, -9.19589)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_wtyc1")
+
+[node name="ParticlesFrontLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-0.316525, -9.24991)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(-0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_wevls")
+
+[node name="ParticlesBackLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-0.828315, 8.59762)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(-0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_8013f")
+
+[node name="ParticlesBackRight" type="CPUParticles2D" parent="."]
+position = Vector2(0.865218, 8.6589)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector2(0.5, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_mjyag")
+
+[node name="ParticlesMiddleLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-1.66213, -6.2908)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_align_y = true
+direction = Vector2(-0.2, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_07ek2")
+color_initial_ramp = SubResource("Gradient_8013f")
+
+[node name="ParticlesMiddleRight" type="CPUParticles2D" parent="."]
+position = Vector2(1.67984, -6.34396)
+amount = 60
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_align_y = true
+direction = Vector2(0.2, 0.5)
+spread = 15.72
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+damping_min = 8.571
+damping_max = 8.571
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_kg3iu")
+color_ramp = SubResource("Gradient_kg3iu")
+color_initial_ramp = SubResource("Gradient_mjyag")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wtyc1")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.64, 0.9)
+scale = Vector2(0.066, 0.066)
+skew = 0.0122173
+texture = ExtResource("17_kg3iu")
+hframes = 4
+vframes = 5
