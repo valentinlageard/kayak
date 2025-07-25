@@ -25,9 +25,25 @@ extends Polygon2D
 @export_range(0.0, 1.0) var threshold_strength: float = 0.5
 ## Controls how strongly sprites are pushed away from the polygon edges. Higher values create a larger empty margin.
 @export_range(0.0, 1.0) var edge_smoothing: float = 0.5
+## If true, filters out spawns that are too close to each other. Can cause a diminution of the spawns)
+@export var use_min_distance: bool = false
+## The minimum allowed distance between the centers of any two spawned sprites.
+@export_range(0.0, 200.0) var min_distance: float = 5.0
 ## The prime number base for the X-axis of the Halton sequence, affecting the point distribution pattern.
+## List of prime numbers
+## 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97, 101,
+## 103, 107, 109, 113,127, 131, 137, 139, 149, 151, 157, 163, 167, 173,179, 181, 191, 193, 197, 199,
+## 211, 223, 227, 229,233, 239, 241, 251, 257, 263, 269, 271, 277, 281,283, 293, 307, 311, 313, 317,
+## 331, 337, 347, 349,353, 359, 367, 373, 379, 383, 389, 397, 401, 409,419, 421, 431, 433, 439, 443,
+## 449, 457, 461, 463,467, 479, 487, 491, 499, 503, 509, 521, 523, 541,547, 557, 563, 569, 571, 577
 @export var prime_number_1: int = 2
 ## The prime number base for the Y-axis of the Halton sequence. Should be different from prime_number_1.
+## List of prime numbers
+## 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97, 101,
+## 103, 107, 109, 113,127, 131, 137, 139, 149, 151, 157, 163, 167, 173,179, 181, 191, 193, 197, 199,
+## 211, 223, 227, 229,233, 239, 241, 251, 257, 263, 269, 271, 277, 281,283, 293, 307, 311, 313, 317,
+## 331, 337, 347, 349,353, 359, 367, 373, 379, 383, 389, 397, 401, 409,419, 421, 431, 433, 439, 443,
+## 449, 457, 461, 463,467, 479, 487, 491, 499, 503, 509, 521, 523, 541,547, 557, 563, 569, 571, 577
 @export var prime_number_2: int = 3
 
 # --- NOISE CONTROLS ---
@@ -113,7 +129,7 @@ extends Polygon2D
 
 ## The instance of the noise generation object.
 var noise_generator: FastNoiseLite
-
+@onready var min_dist_sq:float = min_distance ** 2
 
 ## Called once when the node enters the scene tree, both in the editor and in-game.
 ## This function serves as the main entry point, directing logic based on the context.
@@ -183,12 +199,6 @@ func _configure_noise():
 	noise_generator.seed = randi()
 	_resize_texture()
 	
-# List of prime numbers for the halton distribution
-# 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97, 101,
-# 103, 107, 109, 113,127, 131, 137, 139, 149, 151, 157, 163, 167, 173,179, 181, 191, 193, 197, 199,
-# 211, 223, 227, 229,233, 239, 241, 251, 257, 263, 269, 271, 277, 281,283, 293, 307, 311, 313, 317,
-# 331, 337, 347, 349,353, 359, 367, 373, 379, 383, 389, 397, 401, 409,419, 421, 431, 433, 439, 443,
-# 449, 457, 461, 463,467, 479, 487, 491, 499, 503, 509, 521, 523, 541,547, 557, 563, 569, 571, 577
 
 ## Generates a set of 2D points that are evenly (but not rigidly) distributed
 ## within a given rectangle using the Halton low-discrepancy sequence.
@@ -255,6 +265,19 @@ func _spawn_nodes():
 		if randf() * bounds.size.y * edge_smoothing > dist_top: debug_stats.rejected.edge_smoothing += 1; continue
 		if randf() * bounds.size.y * edge_smoothing > dist_bottom: debug_stats.rejected.edge_smoothing += 1; continue
 		
+		if use_min_distance:
+			var is_too_close = false
+			for existing_point in valid_candidates:
+				# Use distance_squared_to() for better performance than distance_to().
+				if point.distance_squared_to(existing_point) < min_dist_sq:
+					is_too_close = true
+					break # No need to check other points, we already failed.
+			
+		# If the point was too close to any existing one, reject it and continue to the next candidate.
+			if is_too_close:
+				debug_stats.rejected.min_distance += 1
+				continue
+				
 		## If all rules are passed, add the point to the final list.
 		debug_stats.realised += 1
 		valid_candidates.append(point)
