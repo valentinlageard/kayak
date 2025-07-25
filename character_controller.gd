@@ -1,24 +1,34 @@
 extends CharacterBody2D
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimationPlayer = $AnimationPlayer
+@onready var paddle_sound_player: AudioStreamPlayer2D = $PaddleSoundPlayer
+@onready var particles_front_left: CPUParticles2D = $ParticlesFrontLeft
+@onready var particles_front_right: CPUParticles2D = $ParticlesFrontRight
+@onready var particles_back_left: CPUParticles2D = $ParticlesBackLeft
+@onready var particles_back_right: CPUParticles2D = $ParticlesBackRight
+@onready var particles_middle_left: CPUParticles2D = $ParticlesMiddleLeft
+@onready var particles_middle_right: CPUParticles2D = $ParticlesMiddleRight
 
 @export_group("Player Control")
-@export var acceleration: float = 180.0
+@export var acceleration: float = 150.0
 @export var turn_speed: float = 15.0
-@export var min_break_strength: float = 0.1
-@export var break_friction_strength: float = 0.08
-@export var break_turn_power: float = 0.005
+@export var min_break_strength: float = 20.0
+@export var break_friction_strength: float = 0.01
+@export var break_turn_power: float = 0.04
 @export var max_velocity: float = 800.0
-@export var paddle_duration: float = 0.5
-@export var paddle_acceleration_curve: float = 0.5
-@export var friction: float = 0.05
-@export var bounciness: float = 0.75
-@export var align_velocity_to_rotation_strength: float = 0.05
-@export var align_rotation_to_velocity_strength: float = 0.05
+@export var paddle_duration: float = 0.7
+@export var paddle_acceleration_curve: Curve
+@export var friction: float = 0.015
+@export var bounciness: float = 0.4
+@export var align_velocity_to_rotation_strength: float = 0.08
+@export var align_rotation_to_velocity_strength: float = 0.03
+@export var min_particles_velocity_threshold: float = 5
+@export var max_particles_velocity_threshold: float = 40
 
 @export_group("Flow Field")
 @export var field_influence_strength: float = 100.0
 @export var flow_torque_strength: float = 2.0
+
 
 enum State { IDLE, PADDLE_RIGHT, PADDLE_LEFT, BREAK_LEFT, BREAK_RIGHT }
 var current_state: State = State.IDLE
@@ -63,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	if current_state != State.BREAK_LEFT and current_state != State.BREAK_RIGHT:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	velocity = velocity.limit_length(max_velocity)
+	paddle_sound_player.volume_db = paddle_sound_player.volume_db_ref + velocity.length()/100
 
 	# --- 6. MOVE AND HANDLE COLLISIONS ---
 	move_and_slide()
@@ -71,6 +82,15 @@ func _physics_process(delta: float) -> void:
 		var normal = collision.get_normal()
 		velocity = velocity.bounce(normal)
 		velocity *= bounciness
+	
+	# Manage particles
+	var amount = remap(velocity.length(), min_particles_velocity_threshold, max_particles_velocity_threshold, 0, 1)
+	particles_back_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_back_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_front_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_front_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_middle_right.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
+	particles_middle_left.color_initial_ramp.set_color(1, Color(Color.WHITE, amount))
 
 	MusicPlayer.update_player_state(self.velocity, self.global_position)
 
@@ -122,7 +142,7 @@ func _paddle_right_state(delta: float) -> void:
 		return
 		
 	paddle_timer += delta
-	var paddle_strength = ease(paddle_timer / paddle_duration, paddle_acceleration_curve)
+	var paddle_strength = paddle_acceleration_curve.sample(paddle_timer / paddle_duration)
 	var forward_direction = Vector2.UP.rotated(rotation)
 	velocity += forward_direction * acceleration * paddle_strength * delta
 	rotation -= turn_speed * 0.1 * paddle_strength * delta
@@ -133,7 +153,7 @@ func _paddle_left_state(delta: float) -> void:
 		return
 		
 	paddle_timer += delta
-	var paddle_strength = ease(paddle_timer / paddle_duration, paddle_acceleration_curve)
+	var paddle_strength = paddle_acceleration_curve.sample(paddle_timer / paddle_duration)
 	var forward_direction = Vector2.UP.rotated(rotation)
 	velocity += forward_direction * acceleration * paddle_strength * delta
 	rotation += turn_speed * 0.1 * paddle_strength * delta

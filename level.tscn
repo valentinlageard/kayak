@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhljj6usi0txm"]
+[gd_scene load_steps=9 format=3 uid="uid://dhljj6usi0txm"]
 
 [ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ckidrp7ifq3jg" path="res://turtle.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://dqk52qjbitp10" path="res://path_flowfield_source.tscn" id="3_oi3di"]
+[ext_resource type="Texture2D" uid="uid://cl36tb1mao53w" path="res://assets/textures/environment/car.png" id="4_0b4ue"]
 
 [sub_resource type="Curve2D" id="Curve2D_oi3di"]
 _data = {
@@ -18,8 +19,27 @@ point_count = 6
 _data = [Vector2(0.149083, 0), 0.0, 0.0, 0, 0, Vector2(0.263761, 1), 0.0, 0.0, 0, 0, Vector2(0.527668, 0.376263), 0.0, 0.0, 0, 0, Vector2(0.709486, 0.991793), 0.0, 0.0, 0, 0, Vector2(0.893939, 0.686801), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_0b4ue"]
+font_size = 100
+font_color = Color(0.278291, 0.299904, 0.334485, 1)
+
 [node name="Level" type="Node2D"]
-position = Vector2(1604, -36)
+position = Vector2(-1816.46, -27.1042)
+
+[node name="turtle" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+position = Vector2(1452, 105)
+
+[node name="turtle2" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+position = Vector2(1558, 201)
+rotation = -1.42749
+
+[node name="turtle3" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+position = Vector2(1653, -17)
+rotation = -2.83964
+
+[node name="turtle4" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+position = Vector2(1793, 106)
+rotation = 2.87709
 
 [node name="Walls" parent="." instance=ExtResource("2_vonw3")]
 position = Vector2(-777, 315)
@@ -85,9 +105,9 @@ position = Vector2(-1079, 105)
 rotation = -1.8292
 polygon = PackedVector2Array(-8, 10, 10, 15, 22, 9, 10, -9, -9, -4)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="beach" type="Polygon2D" parent="."]
 color = Color(0.650128, 0.650128, 0.650128, 1)
-polygon = PackedVector2Array(2082, -176, 2119, -72, 2076, 164, 2144, 112, 2183, 34, 2205, -64, 2266, -119, 2310, -135, 2307, -207, 2234, -173, 2201, -128, 2159, -134, 2112, -173)
+polygon = PackedVector2Array(2114, -160, 2128, -70, 2077, 163, 2144, 112, 2183, 34, 2205, -64, 2266, -119, 2319, -136, 2312, -208, 2234, -173, 2201, -128, 2159, -134, 2109, -171)
 
 [node name="path_flowfield_source" parent="." instance=ExtResource("3_oi3di")]
 position = Vector2(-15, -1)
@@ -103,17 +123,33 @@ noise_scale_rotation = 0.8
 noise_debug_color = Color(1, 0, 0.2, 0.6)
 arrow_size = 10.0
 
-[node name="turtle" parent="." instance=ExtResource("3_0b4ue")]
-position = Vector2(1452, 105)
+[node name="car trace" type="Line2D" parent="."]
+position = Vector2(0, -3)
+points = PackedVector2Array(2192, -98, 2205, -102, 2213, -107, 2216, -115, 2219, -127, 2224, -136, 2242, -152, 2266, -164, 2315, -179)
+width = 1.5
+default_color = Color(0.549761, 0.549761, 0.54976, 1)
 
-[node name="turtle2" parent="." instance=ExtResource("3_0b4ue")]
-position = Vector2(1558, 201)
-rotation = -1.42749
+[node name="car trace2" type="Line2D" parent="."]
+position = Vector2(6, 4)
+points = PackedVector2Array(2188, -97, 2205, -102, 2213, -107, 2216, -115, 2219, -127, 2224, -136, 2242, -152, 2266, -164, 2315, -179)
+width = 1.5
+default_color = Color(0.549761, 0.549761, 0.54976, 1)
 
-[node name="turtle3" parent="." instance=ExtResource("3_0b4ue")]
-position = Vector2(1653, -17)
-rotation = -2.83964
+[node name="car" type="Sprite2D" parent="."]
+position = Vector2(2179.55, -93.5834)
+rotation = -1.82123
+scale = Vector2(0.0109249, 0.0109249)
+texture = ExtResource("4_0b4ue")
 
-[node name="turtle4" parent="." instance=ExtResource("3_0b4ue")]
-position = Vector2(1793, 106)
-rotation = -3.4061
+[node name="Label" type="Label" parent="."]
+offset_left = 2028.97
+offset_top = -94.8723
+offset_right = 2979.97
+offset_bottom = 462.128
+scale = Vector2(0.05, 0.05)
+text = "A : Paddle left
+D : Paddle right
+Q : Backpaddle left
+E : Backpaddle right"
+label_settings = SubResource("LabelSettings_0b4ue")
+metadata/_edit_use_anchors_ = true
