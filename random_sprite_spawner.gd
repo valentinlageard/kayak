@@ -121,18 +121,6 @@ func _configure_noise():
 	noise_generator.seed = noise_seed
 	noise_generator.frequency = noise_frequency
 
-# Option to smooth texture borders, calculated from the distance to the edges of the polygon
-
-# Use Halton sequence to get evenly spaced points
-
-# IDEA 1: generate the good number N of points, use attraction force from close points with high noise value
-
-# IDEA 2: use rejection sampling, iterate until we have enough points
-
-# IDEA 3: generate the good number N of points, then sample k times around the points and this gives a probability of going to the other points (Markov chain). Iterate m times
-# Grid step
-
-
 	# Fractal
 	noise_generator.fractal_type = fractal_type
 	noise_generator.fractal_octaves = fractal_octaves
