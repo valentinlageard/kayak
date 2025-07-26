@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 FlowfieldManager="*res://flowfield_manager.tscn"
 MusicPlayer="*res://music_system.tscn"
+GlobalSignals="*res://global_signals.gd"
 
 [global_group]
 
