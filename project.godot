@@ -24,6 +24,8 @@ GlobalSignals="*res://global_signals.gd"
 [global_group]
 
 player=""
+npc=""
+environment=""
 
 [input]
 
@@ -53,6 +55,7 @@ break_right={
 2d_physics/layer_1="player"
 2d_physics/layer_2="walls"
 2d_physics/layer_3="npcs"
+2d_physics/layer_4="environment"
 
 [physics]
 
