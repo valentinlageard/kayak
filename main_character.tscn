@@ -211,7 +211,7 @@ flow_torque_strength = 0.5
 [node name="PaddleSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0.71, 0.9)
 scale = Vector2(0.007, 0.007)
-pitch_scale = 0.57
+pitch_scale = 1.03
 script = ExtResource("17_mjyag")
 
 [node name="Camera2D" type="Camera2D" parent="."]

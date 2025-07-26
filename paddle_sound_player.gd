@@ -19,6 +19,7 @@ func _ready():
 func play_paddle_sound():
 	if self.playing:
 		self.stop()
+	self.pitch_scale = randf_range(0.5, 2)
 	self.stream = paddle_sounds.pick_random()
 	self.pitch_scale = randf_range(0.5, 2)
 	self.play()
@@ -26,6 +27,7 @@ func play_paddle_sound():
 func play_backpaddle_sound():
 	if self.playing:
 		self.stop()
+	self.pitch_scale = randf_range(0.5, 2)
 	self.stream = backpaddle_sounds.pick_random()
 	self.pitch_scale = randf_range(0.5, 2)
 	self.play()
