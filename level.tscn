@@ -63,18 +63,18 @@ point_count = 2
 
 [node name="Level" type="Node2D"]
 
-[node name="turtle" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+[node name="turtle" parent="." instance=ExtResource("3_0b4ue")]
 position = Vector2(1452, 105)
 
-[node name="turtle2" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+[node name="turtle2" parent="." instance=ExtResource("3_0b4ue")]
 position = Vector2(1558, 201)
 rotation = -1.42749
 
-[node name="turtle3" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+[node name="turtle3" parent="." instance=ExtResource("3_0b4ue")]
 position = Vector2(1653, -17)
 rotation = -2.83964
 
-[node name="turtle4" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
+[node name="turtle4" parent="." instance=ExtResource("3_0b4ue")]
 position = Vector2(1793, 106)
 rotation = 2.87709
 
