@@ -4,7 +4,7 @@ extends Path2D
 
 # --- Configuration ---
 @export_group("Flow Field Properties")
-@export var strength: float = 300.0
+@export var strength: float = 50.0
 @export var width: float = 100.0
 @export var strength_curve: Curve
 
@@ -28,7 +28,7 @@ func _draw():
 	if not Engine.is_editor_hint() or not curve or curve.get_point_count() < 2:
 		return
 
-	# --- 1. VISUALIZE PATH WIDTH AND NOISE STRENGTH (No Changes) ---
+	# --- 1. VISUALIZE PATH WIDTH AND NOISE STRENGTH ---
 	var baked_points = curve.get_baked_points()
 	if baked_points:
 		for i in range(baked_points.size() - 1):
@@ -59,10 +59,6 @@ func _draw():
 			if strength_curve:
 				strength_multiplier = strength_curve.sample(progress)
 			
-			# --- THE CRITICAL FIX ---
-			# We now lerp from the SLOW spacing to the FAST spacing.
-			# When strength is high (1.0), we get fast_arrow_spacing (dense).
-			# When strength is low (0.0), we get slow_arrow_spacing (sparse).
 			var step = lerp(slow_arrow_spacing, fast_arrow_spacing, strength_multiplier)
 			
 			var path_transform = curve.sample_baked_with_rotation(current_offset)
@@ -96,7 +92,6 @@ func _notification(what):
 
 # --- Core Logic Functions (required by the manager) ---
 func is_position_in_field(world_position: Vector2) -> bool:
-	# (No changes needed in this function)
 	if not curve or curve.get_point_count() < 2:
 		return false
 	var closest_offset = curve.get_closest_offset(to_local(world_position))
