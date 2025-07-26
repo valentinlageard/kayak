@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ckidrp7ifq3jg"]
+[gd_scene load_steps=22 format=3 uid="uid://ckidrp7ifq3jg"]
 
 [ext_resource type="Script" uid="uid://clhvn2ufql2kl" path="res://turtle.gd" id="1_cgedt"]
 [ext_resource type="Texture2D" uid="uid://dy3bpayuf66s5" path="res://assets/textures/turtle/Turtle_swim_1.png" id="1_f1u4q"]
@@ -20,12 +20,75 @@
 friction = 0.0
 bounce = 0.5
 
-[sub_resource type="Curve" id="Curve_mwhbe"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.44685, 1), 0.0, 0.0, 0, 0, Vector2(0.872024, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_rhs7m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.428994, 1), 0.0, 0.0, 0, 0, Vector2(0.813609, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_753jf"]
+_data = [Vector2(0.0739645, 0.443728), 0.0, 0.0, 0, 0, Vector2(0.488166, 0.878077), 0.0, 0.0, 0, 0, Vector2(0.923077, 0.580891), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wr04"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f1u4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2g1hy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cgedt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mwhbe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y178j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rhs7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_753jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rpifa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_x1xwd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5pyye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rhs7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_753jf")
+}, {
+"duration": 5.0,
+"texture": ExtResource("14_rpifa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rpifa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_753jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rhs7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5pyye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rhs7m")
+}],
+"loop": true,
+"name": &"follow_player (todo)",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_f1u4q")
@@ -90,16 +153,19 @@ animations = [{
 radius = 3.95459
 height = 10.218
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_753jf"]
+radius = 108.005
+
 [node name="turtle" type="RigidBody2D" groups=["npc"]]
 collision_layer = 4
 collision_mask = 2
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_2g1hy")
 script = ExtResource("1_cgedt")
-acceleration_curve = SubResource("Curve_mwhbe")
+wandering_acceleration_curve = SubResource("Curve_rhs7m")
+following_acceleration_curve = SubResource("Curve_753jf")
 max_acceleration_force = 2.5
 friction = 0.05
-max_angle_deviation = 80.0
 whisker_length = 25.0
 avoidance_force = 5.0
 knockback_impulse_strength = 100.0
@@ -110,17 +176,35 @@ position = Vector2(-1.41271, -0.446946)
 rotation = 1.5708
 scale = Vector2(0.012, 0.012)
 sprite_frames = SubResource("SpriteFrames_5wr04")
-animation = &"swim"
+animation = &"follow_player (todo)"
 autoplay = "swim"
-frame_progress = 0.940224
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.00406551, -0.0285544)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_f1u4q")
 
-[node name="Node" type="Node" parent="."]
+[node name="FlowFieldEffect" type="Node" parent="."]
 script = ExtResource("11_2g1hy")
+
+[node name="AttachArea2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="AttachArea2D"]
+visible = false
+position = Vector2(33, -2)
+rotation = 1.5708
+polygon = PackedVector2Array(-69.0001, -19.9998, -44.0001, -33.9998, -0.00016284, -45, 41.9999, -40.0002, 70.9999, -25.0003, 3.00013, 37)
+
+[node name="DetachArea2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DetachArea2D"]
+visible = false
+shape = SubResource("CircleShape2D_753jf")
+debug_color = Color(0.603922, 0.537255, 0.129412, 0.290196)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animation_looped"]
+[connection signal="body_shape_entered" from="AttachArea2D" to="." method="_on_attach_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="DetachArea2D" to="." method="_on_detach_area_2d_body_shape_exited"]
