@@ -35,7 +35,6 @@ func _generate_static_body():
 		return
 
 	# --- Part 2: Generate new body ---
-	print("Generating new StaticBody.")
 	var static_body = StaticBody2D.new()
 	var collision_polygon = CollisionPolygon2D.new()
 

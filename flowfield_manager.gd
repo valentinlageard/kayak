@@ -5,11 +5,6 @@ signal field_changed
 var sources: Array[Node] = []
 var contributors: Array[Node] = []
 
-@export_group("Debug Draw")
-@export var show_debug_draw: bool = true
-@export var debug_cell_size: int = 40
-@export var debug_grid_extents: Vector2i = Vector2i(50, 30)
-
 func _ready() -> void:
 	print("FlowfieldManager instantiated")
 

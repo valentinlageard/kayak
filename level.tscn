@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhljj6usi0txm"]
+[gd_scene load_steps=17 format=3 uid="uid://dhljj6usi0txm"]
 
 [ext_resource type="PackedScene" uid="uid://cl4eld1e03jb6" path="res://walls.tscn" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ckidrp7ifq3jg" path="res://turtle.tscn" id="3_0b4ue"]
@@ -23,30 +23,45 @@ point_count = 6
 font_size = 100
 font_color = Color(0.278291, 0.299904, 0.334485, 1)
 
-[sub_resource type="Curve" id="Curve_n6hdu"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.135475, 1), 0.0, 0.0, 0, 0, Vector2(0.878492, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_1ainy"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.141061, 1), 0.0, 0.0, 0, 0, Vector2(0.867318, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="Curve2D" id="Curve2D_0b4ue"]
 _data = {
 "points": PackedVector2Array(-30.0583, 47.9272, 30.0583, -47.9272, -1476.58, -341.383, 33.3109, 24.0579, -33.3109, -24.0579, -1466.01, -458.32, 37.9991, -2.03567, -37.9991, 2.03567, -1657.03, -468.837, 47.6867, 51.1639, -47.6867, -51.1639, -1965.01, -563.17, 26.7741, 20.2172, -26.7741, -20.2172, -2015.22, -652.4, 21.6379, 30.6536, -21.6379, -30.6536, -2210.71, -756.637, 0, 0, 0, 0, -2202.21, -817.578)
 }
 point_count = 7
 
-[sub_resource type="Curve" id="Curve_km5ld"]
+[sub_resource type="Curve" id="Curve_1ainy"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.101955, 1), 0.0, 0.0, 0, 0, Vector2(0.856145, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_f2txt"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.113128, 1), 0.0, 0.0, 0, 0, Vector2(0.912011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.113128, 1), 0.0, 0.0, 0, 0, Vector2(0.356209, 0.337808), 0.0, 0.0, 0, 0, Vector2(0.630719, 0.713647), 0.0, 0.0, 0, 0, Vector2(0.912011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_n6hdu"]
+_data = {
+"points": PackedVector2Array(226.517, 39.7986, -226.517, -39.7986, -496.374, 811.573, 19.2632, 96.8611, -19.2632, -96.8611, -853.64, 580.87, -98.3466, 43.1059, 98.3466, -43.1059, -722.687, 342.347, 6.41833, 41.0126, -6.41833, -41.0126, -579.736, 87.1787, 112.727, 64, -112.727, -64, -679.035, -56.7504, 64.5221, -46.3217, -64.5221, 46.3217, -1007.98, -38.0427)
+}
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_km5ld"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.133987, 1), 0.0, 0.0, 0, 0, Vector2(0.852941, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="Curve" id="Curve_i2t4f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.277778, 0.865772), 0.0, 0.0, 0, 0, Vector2(0.46732, 0.257271), 0.0526587, 0.0526587, 0, 0, Vector2(0.669935, 0.624161), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_f2txt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -2224.23, -911.746, 0, 0, 0, 0, -2250.19, -938.395)
+}
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_n6hdu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Level" type="Node2D"]
-position = Vector2(-1816.46, -27.1042)
 
 [node name="turtle" parent="." groups=["npc"] instance=ExtResource("3_0b4ue")]
 position = Vector2(1452, 105)
@@ -141,7 +156,7 @@ polygon = PackedVector2Array(-78.3547, -82.717, -119.311, -75.5425, -127.277, -4
 color = Color(0.650128, 0.650128, 0.650128, 1)
 polygon = PackedVector2Array(2114, -160, 2128, -70.052, 2075.98, 163.943, 2144, 112, 2183, 34, 2205, -64, 2266, -119, 2319, -136, 2312, -208, 2234, -173, 2201, -128, 2159, -134, 2109, -171)
 
-[node name="path_flowfield_source" parent="." instance=ExtResource("3_oi3di")]
+[node name="river1" parent="." instance=ExtResource("3_oi3di")]
 position = Vector2(-15, -1)
 scale = Vector2(1.0991, 1)
 curve = SubResource("Curve2D_oi3di")
@@ -186,16 +201,23 @@ E : Backpaddle right"
 label_settings = SubResource("LabelSettings_0b4ue")
 metadata/_edit_use_anchors_ = true
 
-[node name="path_flowfield_source2" parent="." instance=ExtResource("3_oi3di")]
-strength = 5.0
-strength_curve = SubResource("Curve_n6hdu")
-noise_strength = 0.1
-noise_curve = SubResource("Curve_1ainy")
-noise_scale_force = 0.4
-
-[node name="path_flowfield_source3" parent="." instance=ExtResource("3_oi3di")]
+[node name="river2" parent="." instance=ExtResource("3_oi3di")]
 curve = SubResource("Curve2D_0b4ue")
 strength = 5.0
-strength_curve = SubResource("Curve_km5ld")
+strength_curve = SubResource("Curve_1ainy")
 noise_strength = 0.1
 noise_curve = SubResource("Curve_f2txt")
+
+[node name="river3" parent="." instance=ExtResource("3_oi3di")]
+position = Vector2(-1081.87, -855.994)
+curve = SubResource("Curve2D_n6hdu")
+strength = 5.0
+strength_curve = SubResource("Curve_km5ld")
+noise_curve = SubResource("Curve_i2t4f")
+
+[node name="river4" parent="." instance=ExtResource("3_oi3di")]
+curve = SubResource("Curve2D_f2txt")
+strength = 8.0
+width = 50.0
+strength_curve = SubResource("Curve_n6hdu")
+noise_strength = 0.0
